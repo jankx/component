@@ -1,0 +1,17 @@
+{
+    "name": "jankx/component",
+    "description": "Jankx components",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Puleeno Nguyen",
+            "email": "puleeno@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "jankx/asset": "*",
+        "jankx/template": "*"
+    }
+}
