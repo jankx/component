@@ -1,5 +1,6 @@
 <?php
 namespace Jankx\Component;
 
-class Body extends BaseComponent {
+class Body extends BaseComponent
+{
 }

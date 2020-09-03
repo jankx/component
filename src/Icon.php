@@ -1,5 +1,6 @@
 <?php
 namespace Jankx\Component;
 
-class Icon extends BaseComponent {
+class Icon extends BaseComponent
+{
 }

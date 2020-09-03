@@ -1,5 +1,6 @@
 <?php
 namespace Jankx\Component;
 
-class Footer extends BaseComponent {
+class Footer extends BaseComponent
+{
 }

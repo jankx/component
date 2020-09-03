@@ -1,5 +1,7 @@
 <?php
 namespace Jankx\Component\Constracts;
 
-interface Component {
+interface Component
+{
+    public function render();
 }
