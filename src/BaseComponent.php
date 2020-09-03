@@ -1,5 +1,7 @@
 <?php
 namespace Jankx\Component;
 
-class BaseComponent {
+use Jankx\Component\Constracts\Component;
+
+class BaseComponent implements Component {
 }
