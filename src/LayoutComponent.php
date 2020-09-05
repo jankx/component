@@ -3,6 +3,6 @@ namespace Jankx\Component;
 
 use Jankx\Component\Abstracts\ComponentComposite;
 
-class BaseComponent extends ComponentComposite
+class LayoutComponent extends ComponentComposite
 {
 }
