@@ -12,7 +12,10 @@ class Header extends Component
 
     protected function createChildCompontsFromPreset($presetName)
     {
-        return apply_filters("jankx_compont_preset_{$presetName}_create_children");
+        return apply_filters(
+            "jankx_compont_preset_{$presetName}_create_children",
+            array()
+        );
     }
 
     public function parseProps($props)
