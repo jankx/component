@@ -1,19 +1,18 @@
 <?php
 namespace Jankx\Component;
 
-use Jankx\Component\Abstracts\BaseComponent;
+use Jankx\Component\Abstracts\Component;
 
-class Header extends BaseComponent
+class Header extends Component
 {
-    protected static $presets = array(
-    );
-
     public static function getName()
     {
         return 'header';
     }
 
-    protected function createChildCompontsFromPreset($presetName) {
+    protected function createChildCompontsFromPreset($presetName)
+    {
+        return apply_filters("jankx_compont_preset_{$presetName}_create_children");
     }
 
     public function parseProps($props)
@@ -22,7 +21,7 @@ class Header extends BaseComponent
             'preset' => 'none',
         ));
 
-        if ($this->props['preset'] === 'none') {
+        if ($this->props['preset'] !== 'none') {
             $this->children = static::createChildCompontsFromPreset($this->props['preset']);
         }
     }

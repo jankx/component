@@ -1,9 +1,9 @@
 <?php
 namespace Jankx\Component;
 
-use Jankx\Component\Abstracts\BaseComponent;
+use Jankx\Component\Abstracts\Component;
 
-class Icon extends BaseComponent
+class Icon extends Component
 {
     public static function getName()
     {

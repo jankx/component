@@ -1,6 +1,8 @@
 <?php
 namespace Jankx\Component;
 
-class Navigation extends BaseComponent
+use Jankx\Component\Abstracts\Component;
+
+class Navigation extends Component
 {
 }

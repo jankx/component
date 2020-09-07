@@ -1,6 +1,8 @@
 <?php
 namespace Jankx\Component;
 
-class Button extends BaseComponent
+use Jankx\Component\Abstracts\Component;
+
+class Button extends Component
 {
 }

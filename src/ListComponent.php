@@ -1,6 +1,8 @@
 <?php
 namespace Jankx\Component;
 
-class ListComponent extends BaseComponent
+use Jankx\Component\Abstracts\Component;
+
+class ListComponent extends Component
 {
 }

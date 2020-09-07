@@ -1,6 +1,8 @@
 <?php
 namespace Jankx\Component;
 
-class Image extends BaseComponent
+use Jankx\Component\Abstracts\Component;
+
+class Image extends Component
 {
 }

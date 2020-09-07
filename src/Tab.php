@@ -1,6 +1,8 @@
 <?php
 namespace Jankx\Component;
 
-class Tab extends BaseComponent
+use Jankx\Component\Abstracts\Component;
+
+class Tab extends Component
 {
 }

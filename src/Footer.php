@@ -1,9 +1,9 @@
 <?php
 namespace Jankx\Component;
 
-use Jankx\Component\Abstracts\BaseComponent;
+use Jankx\Component\Abstracts\Component;
 
-class Footer extends BaseComponent
+class Footer extends Component
 {
     public static function getName()
     {

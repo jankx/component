@@ -21,7 +21,7 @@ function jankx_component($name, $props = array(), $args = array()) {
     if (!isset($components[$name])) {
         error_log(
             sprintf(
-                __('The component `%s`   is not registered in Jankx system', 'jankx'),
+                __('The component `%s` is not registered in Jankx system', 'jankx'),
                 $name
             ),
         );

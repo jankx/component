@@ -1,6 +1,8 @@
 <?php
 namespace Jankx\Component;
 
-class Slider extends BaseComponent
+use Jankx\Component\Abstracts\Component;
+
+class Slider extends Component
 {
 }
