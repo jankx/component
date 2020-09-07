@@ -11,7 +11,9 @@ abstract class Component implements ComponentAbstract
     public function __construct($props, $args)
     {
         // Set component options
-        $this->args = $args;
+        $this->args = wp_parse_args($args, array(
+            'show_on_mobile' => true,
+        ));
 
         // Parse props before render output
         $this->parseProps($props);

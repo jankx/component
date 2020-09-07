@@ -24,6 +24,7 @@ class Registry
             array(
                 Row::getName() => Row::class,
                 Column::getName() => Column::class,
+                Header::getName() => Header::class,
             )
         );
     }
