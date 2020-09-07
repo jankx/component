@@ -22,9 +22,11 @@ class Registry
         static::$components = apply_filters(
             'jankx_components',
             array(
+                Icon::getName() => Icon::class,
                 Row::getName() => Row::class,
                 Column::getName() => Column::class,
                 Header::getName() => Header::class,
+                Footer::getName() => Footer::class,
             )
         );
     }

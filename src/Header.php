@@ -5,16 +5,29 @@ use Jankx\Component\Abstracts\BaseComponent;
 
 class Header extends BaseComponent
 {
-    public static function getName() {
+    protected static $presets = array(
+    );
+
+    public static function getName()
+    {
         return 'header';
     }
 
-    public function parseProps($props) {
-        $this->props = wp_parse_args($props, array(
-            'style' => 'default',
-        ));
+    protected function createChildCompontsFromPreset($presetName) {
     }
 
-    public function render() {
+    public function parseProps($props)
+    {
+        $this->props = wp_parse_args($props, array(
+            'preset' => 'none',
+        ));
+
+        if ($this->props['preset'] === 'none') {
+            $this->children = static::createChildCompontsFromPreset($this->props['preset']);
+        }
+    }
+
+    public function render()
+    {
     }
 }
