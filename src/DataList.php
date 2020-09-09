@@ -7,11 +7,13 @@ class DataList extends Component
 {
     const NAME = 'list';
 
-    public static function getName() {
+    public static function getName()
+    {
         return 'data_list';
     }
 
-    protected function parseProps($props) {
+    protected function parseProps($props)
+    {
         /**
          * @var $type       Type of dropdown support `drop` and `select`.
          * @var $options    Data list for type select
@@ -24,6 +26,7 @@ class DataList extends Component
         ));
     }
 
-    public function render() {
+    public function render()
+    {
     }
 }

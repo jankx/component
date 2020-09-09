@@ -12,7 +12,8 @@ class Icon extends Component
         return 'icon';
     }
 
-    protected static function loadFonts() {
+    protected static function loadFonts()
+    {
         static::$mappingFonts = apply_filters('jankx_component_icon_fonts', array(
             'material' => array(
                 'name' => 'Material Design Icons',
