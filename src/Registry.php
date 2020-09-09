@@ -33,6 +33,9 @@ class Registry
                 Modal::getname()      => Modal::class,
                 SearchForm::getName() => SearchForm::class,
                 Link::getName()       => Link::class,
+                Dropdown::getName()   => Dropdown::class,
+                DataList::getName()   => DataList::class,
+                DataList::NAME        => DataList::class, // Make alias `list` for `datalist`
             )
         );
     }
