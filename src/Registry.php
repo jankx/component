@@ -22,15 +22,16 @@ class Registry
         static::$components = apply_filters(
             'jankx_components',
             array(
-                Icon::getName()     => Icon::class,
-                Row::getName()      => Row::class,
-                Column::getName()   => Column::class,
-                Header::getName()   => Header::class,
-                Footer::getName()   => Footer::class,
-                HTML::getName()     => HTML::class,
-                Template::getName() => Template::class,
-                Logo::getName()     => Logo::class,
-                Modal::getname()    => Modal::class,
+                Icon::getName()       => Icon::class,
+                Row::getName()        => Row::class,
+                Column::getName()     => Column::class,
+                Header::getName()     => Header::class,
+                Footer::getName()     => Footer::class,
+                HTML::getName()       => HTML::class,
+                Template::getName()   => Template::class,
+                Logo::getName()       => Logo::class,
+                Modal::getname()      => Modal::class,
+                SearchForm::getName() => SearchForm::class,
             )
         );
     }
