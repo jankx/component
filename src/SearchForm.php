@@ -14,11 +14,13 @@ class SearchForm extends Component
     {
         $this->props = wp_parse_args($props, array(
             'id' => null,
+            'action' => '',
             'method' => 'GET',
             'live_search' => false,
             'live_search_url' => '',
             'placeholder' => '',
             'submit_text' => __('Submit', 'jankx'),
+            'input_name' => 's',
         ));
     }
 
@@ -26,7 +28,14 @@ class SearchForm extends Component
     {
         $formAttributes = array(
             'method' => strtoupper($this->props['method']),
-            'class' => 'jankx-search-form'
+            'action' => $this->props['action'],
+            'class' => 'jankx-search-form',
+        );
+        $inputAttributes = array(
+            'type' => 'text',
+            'placeholder' => $this->props['placeholder'],
+            'name' => $this->props['input_name'],
+            'value' => get_search_query(),
         );
 
         if ($this->props['id']) {
@@ -37,7 +46,7 @@ class SearchForm extends Component
             'components/search_form',
             array(
                 'form_attributes' => jankx_generate_html_attributes($formAttributes),
-                'placeholder' => $this->props['placeholder'],
+                'input_attributes'  => jankx_generate_html_attributes($inputAttributes),
                 'submit_text' => $this->props['submit_text'],
             ),
             'seach_form',
