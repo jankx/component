@@ -12,7 +12,7 @@ class HTML extends Component
 
     protected function parseProps($props)
     {
-        $this->props = wp_parse_props($props, array(
+        $this->props = wp_parse_args($props, array(
             'content' => '',
         ));
     }
