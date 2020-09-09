@@ -32,6 +32,7 @@ class Registry
                 Logo::getName()       => Logo::class,
                 Modal::getname()      => Modal::class,
                 SearchForm::getName() => SearchForm::class,
+                Link::getName()       => Link::class,
             )
         );
     }
