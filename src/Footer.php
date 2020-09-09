@@ -10,8 +10,9 @@ class Footer extends Component
         return 'footer';
     }
 
-    protected function parseProps($props) {
-        $this->props = wp_parse_args( $props, array(
+    protected function parseProps($props)
+    {
+        $this->props = wp_parse_args($props, array(
             'copyright' => sprintf(__('Copyright &copy; %d %s.', date('Y'), get_bloginfo('name'))),
         ));
     }
@@ -23,7 +24,7 @@ class Footer extends Component
          * Hooked:
          * 10: FooterBuilder::render
          */
-        do_action( 'jankx_template_footer_widgets' );
+        do_action('jankx_template_footer_widgets');
 
         if ($this->props['copyright']) {
             $jankxLovers  = apply_filters('jankx_template_enable_footer_credit', true);

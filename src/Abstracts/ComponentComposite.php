@@ -5,11 +5,71 @@ use Jankx\Component\Constracts\Component;
 
 abstract class ComponentComposite implements Component
 {
-    protected $children = array();
+    protected $props = array();
+    protected $args  = array();
+
+    public function __construct($props, $args)
+    {
+        // Set component options
+        $this->args = wp_parse_args($args, array(
+            'show_on_mobile' => true,
+        ));
+
+        // Parse props before render output
+        $this->parseProps(wp_parse_args(
+            $props,
+            array(
+                'context' => null,
+                'children' => array(),
+            )
+        ));
+    }
+
 
     public function __toString()
     {
-        return (string) $this->render();
+        return (string) $this->generateContent();
+    }
+
+    public function open()
+    {
+        do_action(
+            sprintf('jankx_component_%s_open', static::getName()),
+            $this->props,
+            $this->args
+        );
+    }
+
+    public function close()
+    {
+        do_action(
+            sprintf('jankx_component_%s_close', static::getName()),
+            $this->props,
+            $this->args
+        );
+    }
+
+    public function renderChildren()
+    {
+        if (count($this->props['children']) <= 0) {
+            return;
+        }
+        $output = '';
+        foreach ($this->props['children'] as $childComponent) {
+            $output .= (string) $childComponent;
+        }
+
+        return $output;
+    }
+
+    protected function generateContent()
+    {
+        $content = $this->open();
+
+        $content .= $this->render();
+        $content .= $this->close();
+
+        return $content;
     }
 
     public function addChild($childComponent)
@@ -21,7 +81,7 @@ abstract class ComponentComposite implements Component
             ));
         }
 
-        $this->children[] = $childComponent;
+        $this->props['children'][] = $childComponent;
     }
 
     public function addChildren($childComponents)

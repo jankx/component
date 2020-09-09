@@ -28,7 +28,8 @@ class Registry
                 Header::getName()   => Header::class,
                 Footer::getName()   => Footer::class,
                 HTML::getName()     => HTML::class,
-                Template::getName() => Template::class
+                Template::getName() => Template::class,
+                Logo::getName()     => Logo::class,
             )
         );
     }

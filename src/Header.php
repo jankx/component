@@ -29,7 +29,7 @@ class Header extends Component
         ));
 
         if ($this->props['preset'] !== 'none') {
-            $this->children = static::createChildCompontsFromPreset($this->props['preset']);
+            $this->props['children'] = static::createChildCompontsFromPreset($this->props['preset']);
         }
     }
 
@@ -40,5 +40,6 @@ class Header extends Component
 
     public function render()
     {
+        return $this->renderChildren();
     }
 }
