@@ -8,7 +8,7 @@ abstract class ComponentComposite implements Component
     protected $props = array();
     protected $args  = array();
 
-    public function __construct($props, $args)
+    public function __construct($props, $args = array())
     {
         // Set component options
         $this->args = wp_parse_args($args, array(
