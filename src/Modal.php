@@ -30,10 +30,12 @@ class Modal extends Component
         if (empty($this->props['id'])) {
             return;
         }
-        $output  = sprintf(
-            '<div id="jankx-modal-trigger-%s" class="jankx-trigger trigger-modal">',
-            $this->props['id']
+        $triggerTagAttributes = array(
+            'data-micromodal-trigger' => "jankx-modal-{$this->props['id']}",
+            'id' => "jankx-trigger-{$this->props['id']}",
+            'class' => "jankx-trigger trigger-modal",
         );
+        $output  = sprintf('<div %s>', jankx_generate_html_attributes($triggerTagAttributes));
         $output .= (string) $this->props['click_on'];
         $output .= '</div>';
 
