@@ -30,7 +30,7 @@ function jankx_component($name, $props = array(), $args = array()) {
 
     // Parse args with default values
     $args = wp_parse_args($args, array(
-        'echo' => true,
+        'echo' => false,
     ));
 
     // Create component object

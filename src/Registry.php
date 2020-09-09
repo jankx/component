@@ -30,6 +30,7 @@ class Registry
                 HTML::getName()     => HTML::class,
                 Template::getName() => Template::class,
                 Logo::getName()     => Logo::class,
+                Modal::getname()    => Modal::class,
             )
         );
     }
