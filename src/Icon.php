@@ -16,7 +16,7 @@ class Icon extends Component
         static::$mappingFonts = apply_filters('jankx_component_icon_fonts', array(
             'material' => array(
                 'name' => 'Material Design Icons',
-                'prefix' => 'mdi',
+                'prefix' => 'mdi mdi',
             ),
         ));
     }
