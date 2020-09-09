@@ -13,11 +13,14 @@ class Header extends Component
     protected function createChildCompontsFromPreset($presetName)
     {
         if ($presetName === 'default') {
-            add_filter('jankx_compont_preset_default_create_children', array(__CLASS__, 'createDefaultPreset'));
+            add_filter(
+                'jankx_compont_header_preset_default_components',
+                array(__CLASS__, 'createDefaultPreset')
+            );
         }
 
         return apply_filters(
-            "jankx_compont_preset_{$presetName}_create_children",
+            "jankx_compont_header_preset_{$presetName}_components",
             array()
         );
     }
@@ -26,6 +29,7 @@ class Header extends Component
     {
         $this->props = wp_parse_args($props, array(
             'preset' => 'none',
+            'sticky' => false,
         ));
 
         if ($this->props['preset'] !== 'none') {
