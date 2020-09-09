@@ -22,7 +22,7 @@ class Link extends Component
     public function render()
     {
         // Check the link text or url must have a value
-        if (!isset($this->props['text'], $this->props['url'])) {
+        if (empty($this->props['text']) && empty($this->props['url'])) {
             return;
         }
         return jankx_template('components/link', $this->props, 'link', false);
