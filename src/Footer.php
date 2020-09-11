@@ -13,7 +13,7 @@ class Footer extends Component
     protected function parseProps($props)
     {
         $this->props = wp_parse_args($props, array(
-            'copyright' => sprintf(__('Copyright &copy; %d %s.', date('Y'), get_bloginfo('name'))),
+            'copyright' => sprintf(__('Copyright &copy; %d %s.', 'jankx'), date('Y'), get_bloginfo('name')),
         ));
     }
 

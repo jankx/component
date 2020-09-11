@@ -30,6 +30,7 @@ class Header extends Component
         $this->props = wp_parse_args($props, array(
             'preset' => 'none',
             'sticky' => false,
+            'display' => 'flex',
         ));
 
         if ($this->props['preset'] !== 'none') {
