@@ -2,6 +2,7 @@
 namespace Jankx\Component;
 
 use Jankx\Component\Abstracts\Component;
+use Jankx\Option\Option;
 
 class Header extends Component
 {
@@ -40,6 +41,11 @@ class Header extends Component
 
     public static function createDefaultPreset($components)
     {
+        $logoType = Option::get('logo_type', 'image');
+        array_push($components, new Logo(array(
+            'type' => $logoType,
+            'image_url' => Option::get('logo_image_url'),
+        )));
         return $components;
     }
 
