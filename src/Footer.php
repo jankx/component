@@ -30,7 +30,7 @@ class Footer extends Component
             $jankxLovers  = apply_filters('jankx_template_enable_footer_credit', true);
             $loverMessage = __('Build with Jankx and WordPress.', 'jankx');
 
-            return jankx_template('footer/copyright', array(
+            return jankx_template('layout/footer/copyright', array(
                 'copyright' => array_get($this->props, 'copyright'),
                 'jankx_credit' => $loverMessage,
             ), 'copyright', false);
