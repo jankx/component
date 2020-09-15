@@ -44,6 +44,7 @@ class Header extends Component
         $logoType = Option::get('logo_type', 'image');
         array_push($components, new Logo(array(
             'type' => $logoType,
+            'text' => get_bloginfo('name'),
             'image_url' => Option::get('logo_image_url'),
         )));
 
