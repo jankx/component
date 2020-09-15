@@ -46,7 +46,36 @@ class Header extends Component
             'type' => $logoType,
             'image_url' => Option::get('logo_image_url'),
         )));
+
+        array_push($components, new Navigation(array(
+            'theme_location' => 'primary'
+        )));
+
+        array_push($components, new Template(array(
+            'template_file' => array(
+                'layout/header/end'
+            ),
+        )));
+
         return $components;
+    }
+
+    public function open() {
+        ob_start();
+        jankx_template('layout/header/open');
+
+        parent::open();
+
+        return ob_get_clean();
+    }
+
+    public function close() {
+        ob_start();
+
+        parent::close();
+        jankx_template('layout/header/close');
+
+        return ob_get_clean();
     }
 
     public function render()

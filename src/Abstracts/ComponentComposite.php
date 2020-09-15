@@ -67,6 +67,7 @@ abstract class ComponentComposite implements Component
         $content = $this->open();
 
         $content .= $this->render();
+
         $content .= $this->close();
 
         return $content;

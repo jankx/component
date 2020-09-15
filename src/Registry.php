@@ -37,6 +37,7 @@ class Registry
                 DataList::getName()     => DataList::class,
                 DataList::NAME          => DataList::class, // Make alias `list` for `datalist`
                 BreakingNews::getName() => BreakingNews::class,
+                Navigation::getName()   => Navigation::class,
             )
         );
     }
