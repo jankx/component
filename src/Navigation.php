@@ -5,17 +5,20 @@ use Jankx\Component\Abstracts\Component;
 
 class Navigation extends Component
 {
-    public static function getName() {
+    public static function getName()
+    {
         return 'nav';
     }
 
-    protected function parseProps($props) {
+    protected function parseProps($props)
+    {
         $this->props = wp_parse_args($props, array(
             'theme_location' => '',
         ));
     }
 
-    public function render() {
+    public function render()
+    {
         if (empty($this->props['theme_location'])) {
             return;
         }

@@ -41,13 +41,6 @@ class Header extends Component
 
     public static function createDefaultPreset($components)
     {
-        $logoType = Option::get('logo_type', 'image');
-        array_push($components, new Logo(array(
-            'type' => $logoType,
-            'text' => get_bloginfo('name'),
-            'image_url' => Option::get('logo_image_url'),
-        )));
-
         array_push($components, new Navigation(array(
             'theme_location' => 'primary'
         )));
@@ -61,7 +54,8 @@ class Header extends Component
         return $components;
     }
 
-    public function open() {
+    public function open()
+    {
         ob_start();
         jankx_template('layout/header/open');
 
@@ -70,7 +64,8 @@ class Header extends Component
         return ob_get_clean();
     }
 
-    public function close() {
+    public function close()
+    {
         ob_start();
 
         parent::close();
