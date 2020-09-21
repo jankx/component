@@ -12,9 +12,10 @@ class Logo extends Component
 
     protected function parseProps($props)
     {
+        // Parse component props
         $this->props = wp_parse_args($props, array(
             'type'      => 'text',
-            'text'      => 'Jankx Framework',
+            'show_text' => get_theme_mod('header_text', true),
             'image_url' => '',
             'url'       => site_url(),
             'wrap_tag'  => is_home() || is_front_page() ? 'h1' : 'h2',
