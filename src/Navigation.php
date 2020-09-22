@@ -14,6 +14,7 @@ class Navigation extends Component
     {
         $this->props = wp_parse_args($props, array(
             'theme_location' => '',
+            'open_container' => false,
         ));
     }
 
