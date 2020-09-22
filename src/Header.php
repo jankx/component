@@ -54,26 +54,6 @@ class Header extends Component
         return $components;
     }
 
-    public function open()
-    {
-        ob_start();
-        jankx_template('layout/header/open');
-
-        parent::open();
-
-        return ob_get_clean();
-    }
-
-    public function close()
-    {
-        ob_start();
-
-        parent::close();
-        jankx_template('layout/header/close');
-
-        return ob_get_clean();
-    }
-
     public function render()
     {
         return $this->renderChildren();
