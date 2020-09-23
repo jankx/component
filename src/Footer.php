@@ -29,7 +29,7 @@ class Footer extends Component
         if ($this->props['copyright']) {
             $jankxLovers  = apply_filters('jankx_template_enable_footer_credit', true);
             $loverMessage = sprintf(
-                __('Build with <a href="%" title="Jankx Framework">Jankx</a> and <a href="%s" title="WordPress">WordPress</a>.', 'jankx'),
+                __('Build with <a href="%s" title="Jankx Framework">Jankx</a> and <a href="%s" title="WordPress">WordPress</a>.', 'jankx'),
                 'https://jankx.puleeno.com',
                 'https://wordpress.org'
             );
