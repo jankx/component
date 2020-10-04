@@ -56,6 +56,27 @@ class Header extends Component
 
     public function render()
     {
-        return $this->renderChildren();
+        $headerAttributes = array(
+            'id' => 'jankx-site-header',
+            'class' => array(
+                'jankx-site-header'
+            )
+        );
+        if ($this->props['sticky']) {
+            $headerAttributes['class'][] = 'sticky-header';
+        }
+        ob_start();
+        ?>
+        <header <?php echo jankx_generate_html_attributes($headerAttributes); ?>>
+            <?php do_action('jankx_template_before_header_content'); ?>
+            <?php jankx_open_container(); ?>
+
+                <?php echo $this->renderChildren(); ?>
+
+            <?php jankx_close_container(); ?>
+          <?php do_action('jankx_template_after_header_content'); ?>
+        </header>
+        <?php
+        return ob_get_clean();
     }
 }
