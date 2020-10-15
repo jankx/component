@@ -23,7 +23,7 @@ function jankx_component($name, $props = array(), $args = array()) {
             sprintf(
                 __('The component `%s` is not registered in Jankx system', 'jankx'),
                 $name
-            ),
+            )
         );
         return;
     }
