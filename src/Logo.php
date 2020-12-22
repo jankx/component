@@ -22,9 +22,29 @@ class Logo extends Component
         ));
     }
 
+    public function get_logo_size() {
+
+    }
+
     public function render()
     {
         if ($this->props['type'] === 'image') {
+            $logo_height = get_theme_mod('logo_height') ? get_theme_mod('logo_height') : 60;
+            $logo_stat = get_option('jankx_logo_image_stat', array());
+
+            if ($logo_height != array_get($logo_stat, 'height')) {
+                $logo_image_id = array_get($this->props, 'logo_image_id');
+                if ($logo_image_id > 0) {
+                    $metadata = wp_get_attachment_metadata($logo_image_id);
+                    if ($metadata) {
+                        $real_sizes = $metadata['sizes'];
+                    } else {
+                        $image_file = get_attached_file($logo_image_id);
+                        $image_sizes =  getimagesize($image_file);
+                    }
+                }
+            }
+
             return jankx_template('components/logo/image', $this->props, 'logo_image', false);
         }
         return jankx_template('components/logo/text', $this->props, 'logo_text', false);
