@@ -41,8 +41,14 @@ class Header extends Component
 
     public static function createDefaultPreset($components)
     {
+        array_push($components, new Template(array(
+            'template_file' => array(
+                'layout/header/before'
+            ),
+        )));
+
         array_push($components, new Navigation(array(
-            'theme_location' => 'primary'
+            'theme_location' => apply_filters('jankx_header_component_default_preset_menu', 'primary'),
         )));
 
         array_push($components, new Template(array(
