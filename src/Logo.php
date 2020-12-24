@@ -5,6 +5,29 @@ use Jankx\Component\Abstracts\Component;
 
 class Logo extends Component
 {
+    protected static $defaultProps;
+
+    public function __construct($props, $args = array())
+    {
+        if (is_null(static::$defaultProps)) {
+            $custom_logo_id = get_theme_mod('custom_logo');
+            $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
+
+            static::$defaultProps = array(
+                'type' => has_custom_logo() > 0 ? 'image' : 'text',
+                'show_text' => get_theme_mod('header_text', true),
+                'text' => get_bloginfo('name'),
+                'logo_image_id' => $custom_logo_id,
+                'image_url' => isset($logo[0]) ? (string) $logo[0] : '',
+                'url'       => site_url(),
+                'wrap_tag'  => is_home() || is_front_page() ? 'h1' : 'h2',
+                'class' => '',
+            );
+        }
+
+        parent::__construct($props, $args);
+    }
+
     public static function getName()
     {
         return 'logo';
@@ -13,17 +36,14 @@ class Logo extends Component
     protected function parseProps($props)
     {
         // Parse component props
-        $this->props = wp_parse_args($props, array(
-            'type'      => 'text',
-            'show_text' => get_theme_mod('header_text', true),
-            'image_url' => '',
-            'url'       => site_url(),
-            'wrap_tag'  => is_home() || is_front_page() ? 'h1' : 'h2',
-        ));
+        $this->props = wp_parse_args(
+            $props,
+            static::$defaultProps
+        );
     }
 
-    public function get_logo_size() {
-
+    public function get_logo_size()
+    {
     }
 
     public function render()
