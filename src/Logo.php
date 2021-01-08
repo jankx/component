@@ -50,18 +50,52 @@ class Logo extends Component
     {
         if ($this->props['type'] === 'image') {
             $logo_height = get_theme_mod('logo_height') ? get_theme_mod('logo_height') : 60;
-            $logo_stat = get_option('jankx_logo_image_stat', array());
+            $logo_stat   = get_option('jankx_logo_image_stat', array());
 
             if ($logo_height != array_get($logo_stat, 'height')) {
                 $logo_image_id = array_get($this->props, 'logo_image_id');
+                $height = false;
+                $width  = false;
                 if ($logo_image_id > 0) {
                     $metadata = wp_get_attachment_metadata($logo_image_id);
-                    if ($metadata) {
-                        $real_sizes = $metadata['sizes'];
+
+                    if (empty($metadata)) {
+                        $image_file  = get_attached_file($logo_image_id);
+
+                        if ($image_file) {
+                            $image_sizes =  getimagesize($image_file);
+                            if (!empty($image_sizes)) {
+                                $width  = array_get($image_sizes, 0);
+                                $height = array_get($image_sizes, 1);
+                            }
+                        }
                     } else {
-                        $image_file = get_attached_file($logo_image_id);
-                        $image_sizes =  getimagesize($image_file);
+                        $width  = $metadata['width'];
+                        $height = $metadata['height'];
                     }
+                }
+
+                if ($height > $logo_height) {
+                    $logo_stat = array(
+                        'width'  => ($width * $logo_height) / $height,
+                        'height' => $logo_height
+                    );
+                } else {
+                    $logo_stat = array(
+                        'width'  => $width,
+                        'height' => $height
+                    );
+                }
+
+                $this->props['logo_size']        = $logo_stat;
+                $this->props['logo_size_styles'] = '';
+
+                if ($logo_stat['width']) {
+                    $this->props['logo_size_styles'] = sprintf(
+                        ';width: %spx; height:%spx',
+                        $logo_stat['width'],
+                        $logo_stat['height']
+                    );
                 }
             }
 
