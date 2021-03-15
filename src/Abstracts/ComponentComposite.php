@@ -15,8 +15,8 @@ abstract class ComponentComposite implements Component
             sprintf('jankx_component_%s_options', static::getName()),
             wp_parse_args($args, array(
                 'show_on_mobile' => true,
-            )
-        ));
+            ))
+        );
 
         // Parse props before render output
         $this->parseProps(wp_parse_args(
