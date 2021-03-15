@@ -29,10 +29,15 @@ class Header extends Component
     public function parseProps($props)
     {
         $this->props = wp_parse_args($props, array(
-            'preset' => 'none',
+            'preset' => 'default',
             'sticky' => false,
             'display' => 'flex',
         ));
+
+        $this->props = apply_filters(
+            'jankx_component_header_props',
+            $this->props
+        );
 
         if ($this->props['preset'] !== 'none') {
             $this->props['children'] = static::createChildCompontsFromPreset($this->props['preset']);
@@ -71,20 +76,10 @@ class Header extends Component
         if ($this->props['sticky']) {
             $headerAttributes['class'][] = 'sticky-header';
         }
-        ob_start();
-        ?>
-        <header <?php echo jankx_generate_html_attributes($headerAttributes); ?>>
-            <?php do_action('jankx_template_before_header_content'); ?>
-            <?php jankx_open_container(); ?>
 
-                <?php do_action('jankx_component_before_header'); ?>
-                <?php echo $this->renderChildren(); ?>
-                <?php do_action('jankx_component_after_header'); ?>
-
-            <?php jankx_close_container(); ?>
-          <?php do_action('jankx_template_after_header_content'); ?>
-        </header>
-        <?php
-        return ob_get_clean();
+        return jankx_template('components/header', array(
+            'content' => $this->renderChildren(),
+            'attributes' => jankx_generate_html_attributes($headerAttributes),
+        ), 'component-header', false);
     }
 }

@@ -11,8 +11,11 @@ abstract class ComponentComposite implements Component
     public function __construct($props, $args = array())
     {
         // Set component options
-        $this->args = wp_parse_args($args, array(
-            'show_on_mobile' => true,
+        $this->args = apply_filters(
+            sprintf('jankx_component_%s_options', static::getName()),
+            wp_parse_args($args, array(
+                'show_on_mobile' => true,
+            )
         ));
 
         // Parse props before render output
