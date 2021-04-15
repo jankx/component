@@ -7,7 +7,7 @@ class Logo extends Component
 {
     protected static $defaultProps;
 
-    public function __construct($props, $args = array())
+    public function __construct($props = array(), $args = array())
     {
         if (is_null(static::$defaultProps)) {
             $custom_logo_id = get_theme_mod('custom_logo');
