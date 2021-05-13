@@ -54,6 +54,7 @@ class Header extends Component
 
         array_push($components, new Navigation(array(
             'theme_location' => apply_filters('jankx_header_component_default_preset_menu', 'primary'),
+            'show_home'      => true,
         )));
 
         array_push($components, new Template(array(
