@@ -34,7 +34,7 @@ class Footer extends Component
                 'https://wordpress.org'
             );
 
-            return jankx_template('layout/footer/copyright', array(
+            return jankx_template('partials/footer/copyright', array(
                 'copyright' => array_get($this->props, 'copyright'),
                 'jankx_credit' => $loverMessage,
             ), 'copyright', false);
