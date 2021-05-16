@@ -2,11 +2,14 @@
 namespace Jankx\Component\Abstracts;
 
 use Jankx\Component\Constracts\Component;
+use Jankx\TemplateEngine\Data;
 
 abstract class ComponentComposite implements Component
 {
     protected $props = array();
     protected $args  = array();
+    protected $isGlobal = false;
+    protected $isDataBuild = false;
 
     public function __construct($props, $args = array())
     {
@@ -26,6 +29,10 @@ abstract class ComponentComposite implements Component
                 'children' => array(),
             )
         ));
+
+        if ($this->isGlobal()) {
+            Data::shares($this->buildComponentData());
+        }
     }
 
 
@@ -97,5 +104,25 @@ abstract class ComponentComposite implements Component
                 error_log($e->getMessage());
             }
         }
+    }
+
+    protected function parseProps($props)
+    {
+        $this->props = $props;
+    }
+
+    public function isGlobal()
+    {
+        return $this->isGlobal;
+    }
+
+    public function isDataBuild()
+    {
+        return $this->isDataBuild;
+    }
+
+    public function buildComponentData()
+    {
+        return array();
     }
 }
