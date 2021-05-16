@@ -29,10 +29,6 @@ abstract class ComponentComposite implements Component
                 'children' => array(),
             )
         ));
-
-        if ($this->isGlobal()) {
-            Data::shares($this->buildComponentData());
-        }
     }
 
 
