@@ -5,9 +5,11 @@ use Jankx\Component\Abstracts\Component;
 
 class BreakingNews extends Component
 {
-    public static function getName()
+    const COMPONENT_NAME = 'breaking_news';
+
+    public function getName()
     {
-        return 'breaking_news';
+        return static::COMPONENT_NAME;
     }
 
     public function render()

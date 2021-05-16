@@ -5,9 +5,11 @@ use Jankx\Component\Abstracts\LayoutComponent;
 
 class Column extends LayoutComponent
 {
-    public static function getName()
+    const COMPONENT_NAME = 'breaking_news';
+
+    public function getName()
     {
-        return 'column';
+        return static::COMPONENT_NAME;
     }
 
     public function render()

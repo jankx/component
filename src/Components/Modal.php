@@ -5,9 +5,11 @@ use Jankx\Component\Abstracts\Component;
 
 class Modal extends Component
 {
-    public static function getName()
+    const COMPONENT_NAME = 'modal';
+
+    public function getName()
     {
-        return 'modal';
+        return static::COMPONENT_NAME;
     }
 
     protected function parseProps($props)

@@ -5,9 +5,11 @@ use Jankx\Component\Abstracts\Component;
 
 class Dropdown extends Component
 {
-    public static function getName()
+    const COMPONENT_NAME = 'dropdown';
+
+    public function getName()
     {
-        return 'dropdown';
+        return static::COMPONENT_NAME;
     }
 
     protected function parseProps($props)

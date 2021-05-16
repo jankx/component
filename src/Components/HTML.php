@@ -5,9 +5,11 @@ use Jankx\Component\Abstracts\Component;
 
 class HTML extends Component
 {
-    public static function getName()
+    const COMPONENT_NAME = 'html';
+
+    public function getName()
     {
-        return 'html';
+        return static::COMPONENT_NAME;
     }
 
     protected function parseProps($props)

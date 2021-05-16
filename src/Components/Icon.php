@@ -5,11 +5,13 @@ use Jankx\Component\Abstracts\Component;
 
 class Icon extends Component
 {
+    const COMPONENT_NAME = 'icon';
+
     protected static $mappingFonts;
 
-    public static function getName()
+    public function getName()
     {
-        return 'icon';
+        return static::COMPONENT_NAME;
     }
 
     protected static function loadFonts()

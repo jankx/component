@@ -5,11 +5,11 @@ use Jankx\Component\Abstracts\Component;
 
 class DataList extends Component
 {
-    const NAME = 'list';
+    const COMPONENT_NAME = 'data_list';
 
-    public static function getName()
+    public function getName()
     {
-        return 'data_list';
+        return static::COMPONENT_NAME;
     }
 
     protected function parseProps($props)

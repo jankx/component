@@ -5,6 +5,8 @@ use Jankx\Component\Abstracts\Component;
 
 class Logo extends Component
 {
+    const COMPONENT_NAME = 'logo';
+
     protected static $defaultProps;
 
     public function __construct($props = array(), $args = array())
@@ -28,9 +30,9 @@ class Logo extends Component
         parent::__construct($props, $args);
     }
 
-    public static function getName()
+    public function getName()
     {
-        return 'logo';
+        return static::COMPONENT_NAME;
     }
 
     protected function parseProps($props)

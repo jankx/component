@@ -5,9 +5,11 @@ use Jankx\Component\Abstracts\LayoutComponent;
 
 class Row extends LayoutComponent
 {
-    public static function getName()
+    const COMPONENT_NAME = 'row';
+
+    public function getName()
     {
-        return 'row';
+        return static::COMPONENT_NAME;
     }
 
     public function parseProps($props)

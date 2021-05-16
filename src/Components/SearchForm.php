@@ -5,9 +5,11 @@ use Jankx\Component\Abstracts\Component;
 
 class SearchForm extends Component
 {
-    public static function getName()
+    const COMPONENT_NAME = 'search_form';
+
+    public function getName()
     {
-        return 'search_form';
+        return static::COMPONENT_NAME;
     }
 
     protected function parseProps($props)

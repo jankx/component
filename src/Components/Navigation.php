@@ -5,9 +5,11 @@ use Jankx\Component\Abstracts\Component;
 
 class Navigation extends Component
 {
-    public static function getName()
+    const COMPONENT_NAME = 'nav';
+
+    public function getName()
     {
-        return 'nav';
+        return static::COMPONENT_NAME;
     }
 
     protected function parseProps($props)

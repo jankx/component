@@ -6,9 +6,11 @@ use Jankx\Option\Option;
 
 class Header extends Component
 {
-    public static function getName()
+    const COMPONENT_NAME = 'header';
+
+    public function getName()
     {
-        return 'header';
+        return static::COMPONENT_NAME;
     }
 
     protected function createChildCompontsFromPreset($presetName)

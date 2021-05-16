@@ -5,9 +5,11 @@ use Jankx\Component\Abstracts\Component;
 
 class Link extends Component
 {
-    public static function getName()
+    const COMPONENT_NAME = 'link';
+
+    public function getName()
     {
-        return 'link';
+        return static::COMPONENT_NAME;
     }
 
     protected function parseProps($props)

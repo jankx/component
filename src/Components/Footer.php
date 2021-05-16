@@ -5,9 +5,11 @@ use Jankx\Component\Abstracts\Component;
 
 class Footer extends Component
 {
-    public static function getName()
+    const COMPONENT_NAME = 'footer';
+
+    public function getName()
     {
-        return 'footer';
+        return static::COMPONENT_NAME;
     }
 
     protected function parseProps($props)

@@ -5,9 +5,11 @@ use Jankx\Component\Abstracts\Component;
 
 class Template extends Component
 {
-    public static function getName()
+    const COMPONENT_NAME = 'template_file';
+
+    public function getName()
     {
-        return 'template_file';
+        return static::COMPONENT_NAME;
     }
 
     protected function parseProps($props)
