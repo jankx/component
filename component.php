@@ -1,5 +1,7 @@
 <?php
 use Jankx\Component\Registry;
+use Jankx\TemplateEngine\Data;
+use Jankx\Component\Abstracts\ComponentComposite;
 
 if (function_exists('jankx_component')) {
     // Load Jankx component helpers once time
@@ -37,9 +39,13 @@ function jankx_component($name, $props = array(), $args = array()) {
     $componentClass = array_get($components, $name);
     $component      = new $componentClass($props, $args);
 
+    if (is_a($component, ComponentComposite::class)) {
+        return $component->buildComponentData();
+
     // The component output
-    if (!$args['echo']) {
-        return $component;
+        if (!$args['echo']) {
+            return $component;
+        }
+        echo $component;
     }
-    echo $component;
 }

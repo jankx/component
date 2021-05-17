@@ -10,6 +10,7 @@ abstract class ComponentComposite implements Component
     protected $args  = array();
     protected $isGlobal = false;
     protected $isDataBuild = false;
+    protected $supportEngines = array('wordpress', 'plates');
 
     public function __construct($props, $args = array())
     {
