@@ -1,11 +1,15 @@
 <?php
 namespace Jankx\Component\Abstracts;
 
+use Jankx;
+use Jankx\Template\Template;
 use Jankx\Component\Constracts\Component;
 use Jankx\TemplateEngine\Data;
 
 abstract class ComponentComposite implements Component
 {
+    protected static $isEngineRender = null;
+
     protected $props = array();
     protected $args  = array();
     protected $isGlobal = false;
@@ -121,5 +125,17 @@ abstract class ComponentComposite implements Component
     public function buildComponentData()
     {
         return array();
+    }
+
+    public static function isEngineRender()
+    {
+        if (!is_null(static::$isEngineRender)) {
+            return static::$isEngineRender;
+        }
+        $engine = Template::getEngine(Jankx::ENGINE_ID);
+
+        static::$isEngineRender = $engine->isRenderDirectly();
+
+        return static::$isEngineRender;
     }
 }

@@ -16,7 +16,8 @@ if (function_exists('jankx_component')) {
  * @param array $args The options of component
  * @return void|string
  */
-function jankx_component($name, $props = array(), $args = array()) {
+function jankx_component($name, $props = array(), $args = array())
+{
     // Get all components are supported
     $components = Registry::getComponents();
 
@@ -40,7 +41,9 @@ function jankx_component($name, $props = array(), $args = array()) {
     $component      = new $componentClass($props, $args);
 
     if (is_a($component, ComponentComposite::class)) {
-        return $component->buildComponentData();
+        if (!$component::isEngineRender()) {
+            return $component->buildComponentData();
+        }
 
     // The component output
         if (!$args['echo']) {
