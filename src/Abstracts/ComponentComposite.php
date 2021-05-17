@@ -127,11 +127,12 @@ abstract class ComponentComposite implements Component
         return array();
     }
 
-    public static function isEngineRender()
+    public function isEngineRender()
     {
         if (!is_null(static::$isEngineRender)) {
             return static::$isEngineRender;
         }
+
         $engineName = Jankx::ENGINE_ID;
         if (!in_array($engineName, $this->supportEngines)) {
             foreach ($this->supportEngines as $engineName) {

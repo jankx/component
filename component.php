@@ -41,7 +41,7 @@ function jankx_component($name, $props = array(), $args = array())
     $component      = new $componentClass($props, $args);
 
     if (is_a($component, ComponentComposite::class)) {
-        if (!$component::isEngineRender()) {
+        if (!$component->isEngineRender()) {
             return $component->buildComponentData();
         }
 
