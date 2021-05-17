@@ -132,10 +132,23 @@ abstract class ComponentComposite implements Component
         if (!is_null(static::$isEngineRender)) {
             return static::$isEngineRender;
         }
-        $engine = Template::getEngine(Jankx::ENGINE_ID);
+        $engineName = Jankx::ENGINE_ID;
+        if (!in_array($engineName, $this->supportEngines)) {
+            foreach ($this->supportEngines as $engineName) {
+                $engine = Template::getEngine($engineName);
+                if (!is_null($engine)) {
+                    break;
+                }
+            }
+        } else {
+            $engine = Template::getEngine($engineName);
+        }
+
+        if (is_null($engine)) {
+            return false;
+        }
 
         static::$isEngineRender = $engine->isRenderDirectly();
-
         return static::$isEngineRender;
     }
 }
