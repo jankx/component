@@ -42,13 +42,6 @@ class Footer extends Component
 
     public function render()
     {
-        /**
-         * Footer widgets area action hook
-         * Hooked:
-         * 10: FooterBuilder::render
-         */
-        do_action('jankx_template_footer_widgets');
-
         if ($this->props['copyright']) {
             $jankxLovers  = apply_filters('jankx_template_enable_footer_credit', true);
             $loverMessage = sprintf(
