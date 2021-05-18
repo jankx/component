@@ -170,7 +170,7 @@ abstract class ComponentComposite implements Component
             return false;
         }
 
-        static::$isEngineRender = $engine->isRenderDirectly();
+        static::$isEngineRender = $engine->isDirectRender();
         return static::$isEngineRender;
     }
 
