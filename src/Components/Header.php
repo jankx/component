@@ -42,7 +42,7 @@ class Header extends Component
         );
 
         if ($this->props['preset'] !== 'none') {
-            $this->props['children'] = static::createChildCompontsFromPreset($this->props['preset']);
+            $this->addChildren(static::createChildCompontsFromPreset($this->props['preset']));
         }
     }
 
@@ -50,7 +50,7 @@ class Header extends Component
     {
         array_push($components, new Template(array(
             'template_file' => array(
-                'layout/header/before'
+                'partials/header/before'
             ),
         )));
 
@@ -61,28 +61,42 @@ class Header extends Component
 
         array_push($components, new Template(array(
             'template_file' => array(
-                'layout/header/end'
+                'partials/header/end'
             ),
         )));
 
         return $components;
     }
 
-    public function render()
+    public function buildComponentData()
     {
-        $headerAttributes = array(
-            'id' => 'jankx-site-header',
-            'class' => array(
-                'jankx-site-header'
-            )
-        );
+        $header_id = 'jankx-site-header';
+        $header_classes = array('jankx-site-header');
         if ($this->props['sticky']) {
-            $headerAttributes['class'][] = 'sticky-header';
+            $header_classes[] = 'sticky-header';
         }
 
-        return jankx_template('components/header', array(
+        return array(
             'content' => $this->renderChildren(),
-            'attributes' => jankx_generate_html_attributes($headerAttributes),
-        ), 'component-header', false);
+            'header_id' => $header_id,
+            'header_class' => $header_classes,
+        );
+    }
+
+    public function render()
+    {
+        $data = $this->buildComponentData();
+
+        return jankx_template(
+            'components/header',
+            array(
+                'content' => $data['content'],
+                'attributes' => jankx_generate_html_attributes(array(
+                    'class' => $data['header_class'],
+                    'id' => $data['header_id'],
+                ))
+            ),
+            false
+        );
     }
 }

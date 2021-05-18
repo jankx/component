@@ -8,13 +8,17 @@ use Jankx\TemplateEngine\Data;
 
 abstract class ComponentComposite implements Component
 {
+    const RETURN_TYPE_STRING = 1;
+    const RETURN_TYPE_ARRAY = 2;
+
     protected static $isEngineRender = null;
 
+    protected $parent = null;
     protected $props = array();
     protected $args  = array();
-    protected $isGlobal = false;
-    protected $isDataBuild = false;
-    protected $supportEngines = array('wordpress', 'plates');
+    protected $supportEngines = array('wordpress', 'plates', 'twig');
+
+    protected $returnType = 1;
 
     public function __construct($props, $args = array())
     {
@@ -67,7 +71,7 @@ abstract class ComponentComposite implements Component
         }
         $output = '';
         foreach ($this->props['children'] as $childComponent) {
-            $output .= (string) $childComponent;
+            $output .= $childComponent->render();
         }
 
         return $output;
@@ -92,8 +96,8 @@ abstract class ComponentComposite implements Component
                 Component::class
             ));
         }
-
-        $this->props['children'][] = $childComponent;
+        $childComponent->setParent($this);
+        $this->props['children'][] = &$childComponent;
     }
 
     public function addChildren($childComponents)
@@ -107,19 +111,36 @@ abstract class ComponentComposite implements Component
         }
     }
 
+    public function setParent(&$parent)
+    {
+        $this->parent = $parent;
+    }
+
     protected function parseProps($props)
     {
         $this->props = $props;
     }
 
-    public function isGlobal()
+    public function setReturnType($returnType)
     {
-        return $this->isGlobal;
+        $supportTypes = array(
+            static::RETURN_TYPE_STRING,
+            static::RETURN_TYPE_ARRAY,
+        );
+        if (!in_array($returnType, $supportTypes)) {
+            $error_message = sprintf(__('The return type "%s" is not support', 'jankx'), $returnType);
+
+            return error_log($error_message);
+        }
+        $this->returnType = $returnType;
     }
 
-    public function isDataBuild()
+    public function generate()
     {
-        return $this->isDataBuild;
+        if ($this->returnType === static::RETURN_TYPE_ARRAY) {
+            return $this->buildComponentData();
+        }
+        return $this->render();
     }
 
     public function buildComponentData()
@@ -151,5 +172,10 @@ abstract class ComponentComposite implements Component
 
         static::$isEngineRender = $engine->isRenderDirectly();
         return static::$isEngineRender;
+    }
+
+    public function hasParent()
+    {
+        return $this->parent !== null;
     }
 }

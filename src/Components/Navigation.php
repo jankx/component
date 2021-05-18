@@ -39,7 +39,6 @@ class Navigation extends Component
                     $this->props
                 ),
             ),
-            "navigation_{$this->props['theme_location']}",
             false
         );
     }

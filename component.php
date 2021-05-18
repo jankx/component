@@ -42,13 +42,16 @@ function jankx_component($name, $props = array(), $args = array())
 
     if (is_a($component, ComponentComposite::class)) {
         if (!$component->isEngineRender()) {
-            return $component->buildComponentData();
+            $component->setReturnType($component::RETURN_TYPE_ARRAY);
+        };
+        if ($args['echo'] || $component->hasParent()) {
+            $component->setReturnType($component::RETURN_TYPE_STRING);
         }
 
-    // The component output
+        // The component output
         if (!$args['echo']) {
-            return $component;
+            return $component->generate();
         }
-        echo $component;
+        echo $component->generate();
     }
 }
