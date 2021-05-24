@@ -101,8 +101,9 @@ class Logo extends Component
                 }
             }
 
-            return jankx_template('components/logo/image', $this->props, 'logo_image', false);
+            return jankx_template('components/logo/image', $this->props, false);
         }
-        return jankx_template('components/logo/text', $this->props, 'logo_text', false);
+
+        return jankx_template('components/logo/text', $this->props, false);
     }
 }

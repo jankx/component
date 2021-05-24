@@ -50,7 +50,7 @@ function jankx_component($name, $props = array(), $args = array())
 
         // The component output
         if (!$args['echo']) {
-            return $component->generate();
+            return $component;
         }
         echo $component->generate();
     }
