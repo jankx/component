@@ -41,9 +41,6 @@ function jankx_component($name, $props = array(), $args = array())
     $component      = new $componentClass($props, $args);
 
     if (is_a($component, ComponentComposite::class)) {
-        if (!$component->isEngineRender()) {
-            $component->setReturnType($component::RETURN_TYPE_ARRAY);
-        };
         if ($args['echo'] || $component->hasParent()) {
             $component->setReturnType($component::RETURN_TYPE_STRING);
         }

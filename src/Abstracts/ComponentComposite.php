@@ -11,8 +11,6 @@ abstract class ComponentComposite implements Component
     const RETURN_TYPE_STRING = 1;
     const RETURN_TYPE_ARRAY = 2;
 
-    protected static $isEngineRender = null;
-
     protected $parent = null;
     protected $props = array();
     protected $args  = array();
@@ -146,32 +144,6 @@ abstract class ComponentComposite implements Component
     public function buildComponentData()
     {
         return array();
-    }
-
-    public function isEngineRender()
-    {
-        if (!is_null(static::$isEngineRender)) {
-            return static::$isEngineRender;
-        }
-
-        $engineName = Jankx::ENGINE_ID;
-        if (!in_array($engineName, $this->supportEngines)) {
-            foreach ($this->supportEngines as $engineName) {
-                $engine = Template::getEngine($engineName);
-                if (!is_null($engine)) {
-                    break;
-                }
-            }
-        } else {
-            $engine = Template::getEngine($engineName);
-        }
-
-        if (is_null($engine)) {
-            return false;
-        }
-
-        static::$isEngineRender = $engine->isDirectRender();
-        return static::$isEngineRender;
     }
 
     public function hasParent()
