@@ -16,7 +16,7 @@ define('JANKX_COMPONENT_ROOT_DIR', dirname(__FILE__));
  * @param array $args The options of component
  * @return void|string
  */
-function jankx_component($name, $props = array(), $args = array())
+function jankx_component($name, $props = array(), $echo = false)
 {
     // Get all components are supported
     $components = Registry::getComponents();
@@ -31,22 +31,17 @@ function jankx_component($name, $props = array(), $args = array())
         return;
     }
 
-    // Parse args with default values
-    $args = wp_parse_args($args, array(
-        'echo' => false,
-    ));
-
     // Create component object
     $componentClass = array_get($components, $name);
-    $component      = new $componentClass($props, $args);
+    $component      = new $componentClass($props);
 
     if (is_a($component, ComponentComposite::class)) {
-        if ($args['echo'] || $component->hasParent()) {
+        if ($echo || $component->hasParent()) {
             $component->setReturnType($component::RETURN_TYPE_STRING);
         }
 
         // The component output
-        if (!$args['echo']) {
+        if (!$echo) {
             return $component;
         }
         echo $component->generate();

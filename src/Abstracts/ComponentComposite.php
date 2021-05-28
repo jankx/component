@@ -15,21 +15,12 @@ abstract class ComponentComposite implements Component
 
     protected $parent = null;
     protected $props = array();
-    protected $args  = array();
     protected $supportEngines = array('wordpress', 'plates', 'twig');
 
     protected $returnType = 1;
 
-    public function __construct($props, $args = array())
+    public function __construct($props)
     {
-        // Set component options
-        $this->args = apply_filters(
-            sprintf('jankx_component_%s_options', static::getName()),
-            wp_parse_args($args, array(
-                'show_on_mobile' => true,
-            ))
-        );
-
         // Parse props before render output
         $this->parseProps(wp_parse_args(
             $props,
@@ -50,8 +41,7 @@ abstract class ComponentComposite implements Component
     {
         do_action(
             sprintf('jankx_component_%s_open', static::getName()),
-            $this->props,
-            $this->args
+            $this->props
         );
     }
 
@@ -59,8 +49,7 @@ abstract class ComponentComposite implements Component
     {
         do_action(
             sprintf('jankx_component_%s_close', static::getName()),
-            $this->props,
-            $this->args
+            $this->props
         );
     }
 

@@ -9,7 +9,7 @@ class Logo extends Component
 
     protected static $defaultProps;
 
-    public function __construct($props = array(), $args = array())
+    public function __construct($props = array())
     {
         if (is_null(static::$defaultProps)) {
             $custom_logo_id = get_theme_mod('custom_logo');
@@ -27,7 +27,7 @@ class Logo extends Component
             );
         }
 
-        parent::__construct($props, $args);
+        parent::__construct($props);
     }
 
     public function getName()
