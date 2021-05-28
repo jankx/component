@@ -44,8 +44,8 @@ class SearchForm extends Component
             $formAttributes['id'] = "jankx-form-{$this->props['id']}";
         }
 
-        return jankx_template(
-            'components/search_form',
+        return $this->_render(
+            'search_form',
             array(
                 'form_attributes' => jankx_generate_html_attributes($formAttributes),
                 'input_attributes'  => jankx_generate_html_attributes($inputAttributes),

@@ -3,13 +3,15 @@ namespace Jankx\Component\Abstracts;
 
 use Jankx;
 use Jankx\Template\Template;
-use Jankx\Component\Constracts\Component;
 use Jankx\TemplateEngine\Data;
+use Jankx\Component\Constracts\Component;
 
 abstract class ComponentComposite implements Component
 {
     const RETURN_TYPE_STRING = 1;
     const RETURN_TYPE_ARRAY = 2;
+
+    protected static $engine;
 
     protected $parent = null;
     protected $props = array();
@@ -149,5 +151,30 @@ abstract class ComponentComposite implements Component
     public function hasParent()
     {
         return $this->parent !== null;
+    }
+
+    protected static function getEngine()
+    {
+        if (is_null(static::$engine)) {
+            $engine = Template::createEngine(
+                'jankx_component',
+                apply_filters('jankx_theme_template_directory_name', 'templates/components'),
+                sprintf('%s/templates', JANKX_COMPONENT_ROOT_DIR),
+                class_exists(Jankx::class) ? Jankx::getActiveTemplateEngine() : 'wordpress'
+            );
+            static::$engine = &$engine;
+        }
+        return static::$engine;
+    }
+
+    public function _render()
+    {
+        return call_user_func_array(
+            array(
+                static::getEngine(),
+                'render'
+            ),
+            func_get_args()
+        );
     }
 }

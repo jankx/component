@@ -3,10 +3,10 @@ use Jankx\Component\Registry;
 use Jankx\TemplateEngine\Data;
 use Jankx\Component\Abstracts\ComponentComposite;
 
-if (function_exists('jankx_component')) {
-    // Load Jankx component helpers once time
+if (defined('JANKX_COMPONENT_ROOT_DIR')) {
     return;
 }
+define('JANKX_COMPONENT_ROOT_DIR', dirname(__FILE__));
 
 /**
  * Jankx component

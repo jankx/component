@@ -27,6 +27,6 @@ class Link extends Component
         if (empty($this->props['text']) && empty($this->props['url'])) {
             return;
         }
-        return jankx_template('components/link', $this->props, 'link', false);
+        return $this->_render('link', $this->props, 'link', false);
     }
 }

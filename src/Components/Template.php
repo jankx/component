@@ -25,7 +25,7 @@ class Template extends Component
         if (empty($this->props['template'])) {
             return;
         }
-        return jankx_template(
+        return $this->_render(
             $this->props['template'],
             $this->props['data'],
             null, // Context

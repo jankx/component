@@ -27,11 +27,11 @@ class Navigation extends Component
         }
 
         $templates = array(
-            "components/navigation/{$this->props['theme_location']}",
-            'components/navigation'
+            "navigation/{$this->props['theme_location']}",
+            'navigation'
         );
 
-        return jankx_template(
+        return $this->_render(
             $templates,
             array(
                 'args' => apply_filters(

@@ -87,8 +87,8 @@ class Header extends Component
     {
         $data = $this->buildComponentData();
 
-        return jankx_template(
-            'components/header',
+        return $this->_render(
+            'header',
             array(
                 'content' => $data['content'],
                 'attributes' => jankx_generate_html_attributes(array(
