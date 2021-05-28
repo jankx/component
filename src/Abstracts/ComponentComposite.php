@@ -13,11 +13,7 @@ abstract class ComponentComposite implements Component
 
     protected static $engine;
 
-    protected $parent = null;
     protected $props = array();
-    protected $supportEngines = array('wordpress', 'plates', 'twig');
-
-    protected $returnType = 1;
 
     public function __construct($props)
     {
@@ -85,7 +81,6 @@ abstract class ComponentComposite implements Component
                 Component::class
             ));
         }
-        $childComponent->setParent($this);
         $this->props['children'][] = &$childComponent;
     }
 
@@ -100,36 +95,9 @@ abstract class ComponentComposite implements Component
         }
     }
 
-    public function setParent(&$parent)
-    {
-        $this->parent = $parent;
-    }
-
     protected function parseProps($props)
     {
         $this->props = $props;
-    }
-
-    public function setReturnType($returnType)
-    {
-        $supportTypes = array(
-            static::RETURN_TYPE_STRING,
-            static::RETURN_TYPE_ARRAY,
-        );
-        if (!in_array($returnType, $supportTypes)) {
-            $error_message = sprintf(__('The return type "%s" is not support', 'jankx'), $returnType);
-
-            return error_log($error_message);
-        }
-        $this->returnType = $returnType;
-    }
-
-    public function generate()
-    {
-        if ($this->returnType === static::RETURN_TYPE_ARRAY) {
-            return $this->buildComponentData();
-        }
-        return $this->render();
     }
 
     public function buildComponentData()
@@ -137,33 +105,26 @@ abstract class ComponentComposite implements Component
         return array();
     }
 
-    public function hasParent()
-    {
-        return $this->parent !== null;
-    }
-
-    protected static function getEngine()
-    {
-        if (is_null(static::$engine)) {
-            $engine = Template::createEngine(
-                'jankx_component',
-                apply_filters('jankx_theme_template_directory_name', 'templates/components'),
-                sprintf('%s/templates', JANKX_COMPONENT_ROOT_DIR),
-                class_exists(Jankx::class) ? Jankx::getActiveTemplateEngine() : 'wordpress'
-            );
-            static::$engine = &$engine;
-        }
-        return static::$engine;
-    }
-
     public function _render()
     {
+        $engine = Template::getEngine('jankx');
+        if (is_null($engine)) {
+            throw \Exception('The Jankx template engine is not initialized');
+        }
+
+        $args = func_get_args();
+        $templates = array_get($args, 0);
+        if (is_array($templates)) {
+            $args[0] = array_map(function ($template) {
+                return sprintf('components/%s', $template);
+            }, $templates);
+        } else {
+            $args[0] = sprintf('components/%s', $templates);
+        }
+
         return call_user_func_array(
-            array(
-                static::getEngine(),
-                'render'
-            ),
-            func_get_args()
+            array($engine, 'render'),
+            $args
         );
     }
 }

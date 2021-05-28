@@ -36,14 +36,10 @@ function jankx_component($name, $props = array(), $echo = false)
     $component      = new $componentClass($props);
 
     if (is_a($component, ComponentComposite::class)) {
-        if ($echo || $component->hasParent()) {
-            $component->setReturnType($component::RETURN_TYPE_STRING);
-        }
-
         // The component output
         if (!$echo) {
             return $component;
         }
-        echo $component->generate();
+        echo $component;
     }
 }

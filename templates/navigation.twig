@@ -1,8 +1,0 @@
-<nav class="jankx-ui navigation navigation-{{ args.theme_location }}">
-{% if args.open_container %}
-    {{ open_container }}
-    {{ close_container }}
-{% else %}
-    {{ function('wp_nav_menu') }}
-{% endif %}
-</nav>

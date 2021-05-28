@@ -51,7 +51,7 @@ class Footer extends Component
             );
 
             return $this->_render(
-                'footer/copyright',
+                'footer',
                 $this->buildComponentData(),
                 false
             );
