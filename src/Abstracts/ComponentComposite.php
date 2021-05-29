@@ -8,9 +8,6 @@ use Jankx\Component\Constracts\Component;
 
 abstract class ComponentComposite implements Component
 {
-    const RETURN_TYPE_STRING = 1;
-    const RETURN_TYPE_ARRAY = 2;
-
     protected static $engine;
 
     protected $props = array();
