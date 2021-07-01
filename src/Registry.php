@@ -1,7 +1,6 @@
 <?php
 namespace Jankx\Component;
 
-use Jankx\Component\Components\Icon;
 use Jankx\Component\Components\Row;
 use Jankx\Component\Components\Column;
 use Jankx\Component\Components\Header;
@@ -38,7 +37,6 @@ class Registry
         static::$components = apply_filters(
             'jankx_components',
             array(
-                Icon::COMPONENT_NAME         => Icon::class,
                 Row::COMPONENT_NAME          => Row::class,
                 Column::COMPONENT_NAME       => Column::class,
                 Header::COMPONENT_NAME       => Header::class,
