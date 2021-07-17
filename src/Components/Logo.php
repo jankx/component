@@ -44,10 +44,6 @@ class Logo extends Component
         );
     }
 
-    public function get_logo_size()
-    {
-    }
-
     public function render()
     {
         if ($this->props['type'] === 'image') {
@@ -58,17 +54,26 @@ class Logo extends Component
                 $logo_image_id = array_get($this->props, 'logo_image_id');
                 $height = false;
                 $width  = false;
+                $is_svg = false;
+
                 if ($logo_image_id > 0) {
                     $metadata = wp_get_attachment_metadata($logo_image_id);
 
                     if (empty($metadata)) {
                         $image_file  = get_attached_file($logo_image_id);
-
                         if ($image_file) {
-                            $image_sizes =  getimagesize($image_file);
-                            if (!empty($image_sizes)) {
-                                $width  = array_get($image_sizes, 0);
-                                $height = array_get($image_sizes, 1);
+                            $is_svg = mime_content_type($image_file) === 'image/svg';
+                            if ($is_svg) {
+                                $xmlget = simplexml_load_file($image_file);
+                                $xmlattributes = $xmlget->attributes();
+                                $width = (string) $xmlattributes->width;
+                                $height = (string) $xmlattributes->height;
+                            } else {
+                                $image_sizes =  getimagesize($image_file);
+                                if (!empty($image_sizes)) {
+                                    $width  = array_get($image_sizes, 0);
+                                    $height = array_get($image_sizes, 1);
+                                }
                             }
                         }
                     } else {
@@ -77,7 +82,7 @@ class Logo extends Component
                     }
                 }
 
-                if ($height > $logo_height) {
+                if ($is_svg || $height > $logo_height) {
                     $logo_stat = array(
                         'width'  => ($width * $logo_height) / $height,
                         'height' => $logo_height
@@ -89,16 +94,18 @@ class Logo extends Component
                     );
                 }
 
-                $this->props['logo_size']        = $logo_stat;
-                $this->props['logo_size_styles'] = '';
+                update_option('jankx_logo_image_stat', $logo_stat);
+            }
 
-                if ($logo_stat['width']) {
-                    $this->props['logo_size_styles'] = sprintf(
-                        ';width: %spx; height:%spx',
-                        $logo_stat['width'],
-                        $logo_stat['height']
-                    );
-                }
+            $this->props['logo_size']        = $logo_stat;
+            $this->props['logo_size_styles'] = '';
+
+            if ($logo_stat['width']) {
+                $this->props['logo_size_styles'] = sprintf(
+                    ';width: %spx; height:%spx',
+                    $logo_stat['width'],
+                    $logo_stat['height']
+                );
             }
 
             return $this->_render('logo/image', $this->props, false);
