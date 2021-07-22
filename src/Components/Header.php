@@ -61,7 +61,7 @@ class Header extends Component
 
         array_push($components, new Template(array(
             'template_file' => array(
-                'partials/header/end'
+                'partials/header/after'
             ),
         )));
 
