@@ -26,7 +26,7 @@ class Footer extends Component
 
     public function buildComponentData()
     {
-        $enableCredit  = apply_filters('$this->_render(_enable_footer_credit', true);
+        $enableCredit  = apply_filters('jankx/layout/footer/credit/enable', true);
         $creditMessage = sprintf(
             __('Build with <a href="%s" title="Jankx Framework">Jankx</a> and <a href="%s" title="WordPress">WordPress</a>.', 'jankx'),
             'https://jankx.puleeno.com',
@@ -43,13 +43,6 @@ class Footer extends Component
     public function render()
     {
         if ($this->props['copyright']) {
-            $jankxLovers  = apply_filters('$this->_render(_enable_footer_credit', true);
-            $loverMessage = sprintf(
-                __('Build with <a href="%s" title="Jankx Framework">Jankx</a> and <a href="%s" title="WordPress">WordPress</a>.', 'jankx'),
-                'https://jankx.puleeno.com',
-                'https://wordpress.org'
-            );
-
             return $this->_render(
                 'footer',
                 $this->buildComponentData(),
