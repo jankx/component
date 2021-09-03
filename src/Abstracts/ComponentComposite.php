@@ -17,10 +17,7 @@ abstract class ComponentComposite implements Component
         // Parse props before render output
         $this->parseProps(wp_parse_args(
             $props,
-            array(
-                'context' => null,
-                'children' => array(),
-            )
+            $this->defaultProps(),
         ));
     }
 
@@ -32,7 +29,10 @@ abstract class ComponentComposite implements Component
 
     public function defaultProps()
     {
-        return array();
+        return array(
+            'context' => null,
+            'children' => array(),
+        );
     }
 
     public function open()
@@ -100,8 +100,8 @@ abstract class ComponentComposite implements Component
     public function parseProps($props)
     {
         $this->props = wp_parse_args(
-            $this->defaultProps(),
-            $props
+            is_array($props) ? $props : array(),
+            $this->props,
         );
     }
 
