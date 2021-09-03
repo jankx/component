@@ -12,7 +12,7 @@ abstract class ComponentComposite implements Component
 
     protected $props = array();
 
-    public function __construct($props)
+    public function __construct($props = array())
     {
         // Parse props before render output
         $this->parseProps(wp_parse_args(
@@ -92,7 +92,7 @@ abstract class ComponentComposite implements Component
         }
     }
 
-    protected function parseProps($props)
+    public function parseProps($props)
     {
         $this->props = $props;
     }

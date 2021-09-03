@@ -12,7 +12,7 @@ class SearchForm extends Component
         return static::COMPONENT_NAME;
     }
 
-    protected function parseProps($props)
+    public function parseProps($props)
     {
         $this->props = wp_parse_args($props, array(
             'id' => null,

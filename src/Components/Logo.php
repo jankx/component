@@ -35,7 +35,7 @@ class Logo extends Component
         return static::COMPONENT_NAME;
     }
 
-    protected function parseProps($props)
+    public function parseProps($props)
     {
         // Parse component props
         $this->props = wp_parse_args(
