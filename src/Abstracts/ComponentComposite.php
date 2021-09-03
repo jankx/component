@@ -30,6 +30,11 @@ abstract class ComponentComposite implements Component
         return (string) $this->generateContent();
     }
 
+    public function defaultProps()
+    {
+        return array();
+    }
+
     public function open()
     {
         do_action(
@@ -94,7 +99,10 @@ abstract class ComponentComposite implements Component
 
     public function parseProps($props)
     {
-        $this->props = $props;
+        $this->props = wp_parse_args(
+            $this->defaultProps(),
+            $props
+        );
     }
 
     public function buildComponentData()
