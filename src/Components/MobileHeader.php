@@ -18,7 +18,15 @@ class MobileHeader extends Component implements ComponentViaActionHook, Componen
     {
         return apply_filters(
             'jankx/component/mobile_header/render_hook',
-            'wp_body_open'
+            'jankx_template_after_header'
+        );
+    }
+
+    public function getPriority()
+    {
+        return apply_filters(
+            'jankx/component/mobile_header/render_hook/priority',
+            10
         );
     }
 

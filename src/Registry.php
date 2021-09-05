@@ -92,7 +92,11 @@ class Registry
             ));
 
             if (!is_a($component, ComponentPlatform::class) || in_array($platform, (array) $component->getPlatform())) {
-                add_action($component->getActionHook(), array($component, 'render'));
+                add_action(
+                    $component->getActionHook(),
+                    array($component, 'render'),
+                    $component->getPriority()
+                );
 
                 static::$hookComponents[$component->getActionHook()][$component->getName()] = $component;
             }
