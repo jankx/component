@@ -8,6 +8,8 @@ use Jankx\Component\Constracts\Component;
 
 abstract class ComponentComposite implements Component
 {
+    const PLATFORM = ['mobile', 'tablet', 'desktop'];
+
     protected static $engine;
 
     protected $props = array();

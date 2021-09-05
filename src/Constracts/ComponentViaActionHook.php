@@ -1,7 +1,7 @@
 <?php
 namespace Jankx\Component\Constracts;
 
-interface ComponentActionHook
+interface ComponentViaActionHook
 {
     public function getActionHook();
 }

@@ -1,6 +1,7 @@
 <?php
 namespace Jankx\Component;
 
+use Jankx;
 use Jankx\Component\Components\Row;
 use Jankx\Component\Components\Column;
 use Jankx\Component\Components\Header;
@@ -16,9 +17,14 @@ use Jankx\Component\Components\DataList;
 use Jankx\Component\Components\BreakingNews;
 use Jankx\Component\Components\Navigation;
 
+use Jankx\Component\Constracts\ComponentViaActionHook;
+use Jankx\Component\Constracts\ComponentPlatform;
+use Jankx\Component\Components\MobileHeader;
+
 class Registry
 {
     protected static $components = array();
+    protected static $hookComponents = array();
 
     public static function register($name, $componentClass)
     {
@@ -54,10 +60,50 @@ class Registry
                 Navigation::COMPONENT_NAME   => Navigation::class,
             )
         );
+
+        add_action('template_redirect', array(__CLASS__, 'loadComponentViaHooks'), 30);
     }
 
     public static function getComponents()
     {
         return static::$components;
+    }
+
+    public static function loadComponentViaHooks()
+    {
+        $components = apply_filters('jankx/load/via_hook/components', array(
+            MobileHeader::COMPONENT_NAME => MobileHeader::class,
+        ));
+        $platform = 'desktop';
+        if (Jankx::device()->isMobile()) {
+            $platform = 'mobile';
+        } elseif (Jankx::device()->isTablet()) {
+            $platform = 'tablet';
+        }
+
+        foreach ($components as $component_cls) {
+            if (!is_a($component_cls, ComponentViaActionHook::class, true)) {
+                continue;
+            }
+            $component = new $component_cls();
+            $component->parseProps(apply_filters(
+                "jankx/load/via_hook/component/{$component->getName()}/props",
+                array()
+            ));
+
+            if (!is_a($component, ComponentPlatform::class) || in_array($platform, (array) $component->getPlatform())) {
+                add_action($component->getActionHook(), array($component, 'render'));
+
+                static::$hookComponents[$component->getActionHook()][$component->getName()] = $component;
+            }
+        }
+    }
+
+    public static function getComponentViaHook($hookName, $componentName)
+    {
+        if (!isset(static::$hookComponents[$hookName], static::$hookComponents[$hookName][$componentName])) {
+            return null;
+        }
+        return static::$hookComponents[$hookName][$componentName];
     }
 }
