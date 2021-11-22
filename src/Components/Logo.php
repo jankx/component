@@ -14,6 +14,7 @@ class Logo extends Component
         if (is_null(static::$defaultProps)) {
             $custom_logo_id = get_theme_mod('custom_logo');
             $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
+            $logo_tag = apply_filters('jankx/html/logo/tag', 'div');
 
             static::$defaultProps = array(
                 'type' => has_custom_logo() > 0 ? 'image' : 'text',
@@ -22,7 +23,7 @@ class Logo extends Component
                 'logo_image_id' => $custom_logo_id,
                 'image_url' => isset($logo[0]) ? (string) $logo[0] : '',
                 'url'       => site_url(),
-                'wrap_tag'  => is_home() || is_front_page() ? 'h1' : 'h2',
+                'wrap_tag'  => $logo_tag,
                 'class' => '',
             );
         }
