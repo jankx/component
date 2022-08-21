@@ -71,9 +71,11 @@ class Registry
 
     public static function loadComponentViaHooks()
     {
-        $components = apply_filters('jankx/load/via_hook/components', array(
-            MobileHeader::COMPONENT_NAME => MobileHeader::class,
-        ));
+        $components = array();
+        if (apply_filters('jankx/template/header/mobile/enabled', true)) {
+            $components[MobileHeader::COMPONENT_NAME] = MobileHeader::class;
+        }
+        $components = apply_filters('jankx/load/via_hook/components', $components);
         $platform = 'desktop';
         if (Jankx::device()->isMobile()) {
             $platform = 'mobile';
