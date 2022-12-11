@@ -9,5 +9,11 @@ interface Component
 
     public function parseProps($props);
 
+    public function buildComponentData();
+
     public function render();
+
+    public function __toString();
+
+    public function echo();
 }

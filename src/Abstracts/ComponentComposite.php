@@ -66,6 +66,9 @@ abstract class ComponentComposite implements Component
         return $output;
     }
 
+    /**
+     * @return string
+     */
     protected function generateContent()
     {
         $content = $this->open();
@@ -116,7 +119,7 @@ abstract class ComponentComposite implements Component
     {
         $engine = Template::getEngine('jankx');
         if (is_null($engine)) {
-            throw \Exception('The Jankx template engine is not initialized');
+            throw new \Exception('The Jankx template engine is not initialized');
         }
 
         $args = func_get_args();
@@ -133,5 +136,13 @@ abstract class ComponentComposite implements Component
             array($engine, 'render'),
             $args
         );
+    }
+
+    /**
+     * @return void
+     */
+    public function echo()
+    {
+        echo $this->generateContent();
     }
 }
