@@ -25,7 +25,7 @@ class Template extends Component
         if (empty($this->props['template'])) {
             return;
         }
-        return $this->_render(
+        return $this->renderViaEngine(
             $this->props['template'],
             $this->props['data'],
             null, // Context

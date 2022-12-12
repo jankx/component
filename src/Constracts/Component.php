@@ -5,11 +5,13 @@ interface Component
 {
     public function getName();
 
-    public function defaultProps();
+    public static function getTemplateEngine();
 
     public function parseProps($props);
 
     public function buildComponentData();
+
+    public function renderViaEngine();
 
     public function render();
 

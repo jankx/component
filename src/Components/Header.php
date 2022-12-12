@@ -87,7 +87,7 @@ class Header extends Component
     {
         $data = $this->buildComponentData();
 
-        return $this->_render(
+        return $this->renderViaEngine(
             'header',
             array(
                 'content' => $data['content'],

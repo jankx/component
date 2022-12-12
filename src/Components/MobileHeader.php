@@ -73,7 +73,7 @@ class MobileHeader extends Component implements ComponentViaActionHook, Componen
         echo sprintf('<div %s>', jankx_generate_html_attributes($attributes));
         do_action('jankx/component/mobile_header/content/before');
 
-        $this->_render('mobile/header', array(
+        $this->renderViaEngine('mobile/header', array(
             'elements' => $this->getMobileHeaderElements(),
         ));
 

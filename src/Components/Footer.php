@@ -43,7 +43,7 @@ class Footer extends Component
     public function render()
     {
         if ($this->props['copyright']) {
-            return $this->_render(
+            return $this->renderViaEngine(
                 'footer',
                 $this->buildComponentData(),
                 false

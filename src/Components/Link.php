@@ -27,6 +27,6 @@ class Link extends Component
         if (empty($this->props['text']) && empty($this->props['url'])) {
             return;
         }
-        return $this->_render('link', $this->props, 'link', false);
+        return $this->renderViaEngine('link', $this->props, 'link', false);
     }
 }

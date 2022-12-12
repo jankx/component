@@ -109,9 +109,9 @@ class Logo extends Component
                 );
             }
 
-            return $this->_render('logo/image', $this->props, false);
+            return $this->renderViaEngine('logo/image', $this->props, false);
         }
 
-        return $this->_render('logo/text', $this->props, false);
+        return $this->renderViaEngine('logo/text', $this->props, false);
     }
 }

@@ -31,7 +31,7 @@ class Navigation extends Component
             'navigation'
         );
 
-        return $this->_render(
+        return $this->renderViaEngine(
             $templates,
             array(
                 'args' => apply_filters(

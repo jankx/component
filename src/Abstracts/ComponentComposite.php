@@ -29,7 +29,7 @@ abstract class ComponentComposite implements Component
         return (string) $this->generateContent();
     }
 
-    public function defaultProps()
+    protected function defaultProps()
     {
         return array(
             'context' => null,
@@ -115,9 +115,9 @@ abstract class ComponentComposite implements Component
         return array();
     }
 
-    public function _render()
+    public function renderViaEngine()
     {
-        $engine = Template::getEngine('jankx');
+        $engine = static::getTemplateEngine();
         if (is_null($engine)) {
             throw new \Exception('The Jankx template engine is not initialized');
         }
@@ -144,5 +144,13 @@ abstract class ComponentComposite implements Component
     public function echo()
     {
         echo $this->generateContent();
+    }
+
+    public static function getTemplateEngine()
+    {
+        if (is_null(static::$engine)) {
+            static::$engine = Template::getEngine('jankx');
+        }
+        return static::$engine;
     }
 }
