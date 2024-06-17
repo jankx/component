@@ -18,7 +18,7 @@ class MobileHeader extends Component implements ComponentViaActionHook, Componen
     {
         return apply_filters(
             'jankx/component/mobile_header/render_hook',
-            'jankx_template_after_header'
+            'jankx/template/header/after'
         );
     }
 
