@@ -14,7 +14,8 @@ define('JANKX_COMPONENT_ROOT_DIR', dirname(__FILE__));
  * @param string $name The component name
  * @param array $props Component property or data
  * @param array $args The options of component
- * @return void|string
+ *
+ * @return Jankx\Component\Constracts\Component | null;
  */
 function jankx_component($name, $props = array(), $echo = false)
 {
@@ -28,7 +29,7 @@ function jankx_component($name, $props = array(), $echo = false)
                 $name
             )
         );
-        return;
+        return null;
     }
 
     // Create component object
@@ -42,4 +43,5 @@ function jankx_component($name, $props = array(), $echo = false)
         }
         echo $component;
     }
+    return $component;
 }
